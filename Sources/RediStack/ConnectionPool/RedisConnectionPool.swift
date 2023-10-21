@@ -26,7 +26,7 @@ import Logging
 /// Note that `RedisConnectionPool` is entirely thread-safe, even though all of its connections belong to a
 /// single `EventLoop`: if callers call the API from a different `EventLoop` (or from no `EventLoop` at all)
 /// `RedisConnectionPool` will ensure that the call is dispatched to the correct loop.
-public class RedisConnectionPool {
+public final class RedisConnectionPool {
     /// A unique identifer to represent this connection.
     public let id = UUID()
     /// The count of connections that are active and available for use.
@@ -104,7 +104,6 @@ extension RedisConnectionPool {
     /// Closes all connections in the pool and deactivates the pool from creating new connections.
     ///
     /// This method is safe to call multiple times.
-    /// - Important: If the pool has connections in active use, the close process will not complete.
     /// - Parameters:
     ///     - promise: A notification promise to resolve once the close process has completed.
     ///     - logger: An optional logger to use for any log statements generated while closing the pool.
